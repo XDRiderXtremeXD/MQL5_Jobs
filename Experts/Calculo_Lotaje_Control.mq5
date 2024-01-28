@@ -58,6 +58,7 @@ void OnTimer()
             ||tipo==ORDER_TYPE_SELL_STOP||tipo==ORDER_TYPE_SELL_LIMIT)
             if(Reason==ORDER_REASON_MOBILE)
               {
+               Sleep(1000);
                if(trade.OrderDelete(Ticket))
                  {
                   double Lotaje=0;

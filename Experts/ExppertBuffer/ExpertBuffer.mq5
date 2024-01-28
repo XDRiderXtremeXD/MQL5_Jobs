@@ -20,7 +20,6 @@ input int TESTING_BufferSELL=1;
 
 
 
-datetime Until=D'2023.07.10 00:00';
 //+------------------------------------------------------------------+
 //| Global Variables                                                 |
 //+------------------------------------------------------------------+
@@ -30,13 +29,6 @@ CControlsExpertBuffer ExtDialog;
 //+------------------------------------------------------------------+
 int OnInit()
   {
-   if(TimeCurrent()>Until)
-     {
-      Alert("Tiempo de prueba finalizado el dia ",TimeToString(Until,TIME_DATE|TIME_MINUTES));
-      return(INIT_FAILED);
-     }
-
-   Comment("Tiempo limite hasta el dia ",TimeToString(Until,TIME_DATE|TIME_MINUTES));
 //--- create application dialog
    if(!ExtDialog.Create(0,"Controls",0,20,20,360,324))
       return(INIT_FAILED);
@@ -94,9 +86,6 @@ void OnChartEvent(const int id,         // event ID
 //+------------------------------------------------------------------+
 void OnTimer()
   {
-   if(TimeCurrent()>Until)
-      ExpertRemove();
-
    ExtDialog.OnTimer_();
   }
 //+------------------------------------------------------------------+
