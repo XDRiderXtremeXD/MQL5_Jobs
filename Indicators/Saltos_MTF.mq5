@@ -33,7 +33,7 @@ int OnInit()
    datetime tiempoStart=iTime(Symbol(),Periodo,Velas_);
    int Barras=iBarShift(Symbol(),Periodo_Saltos,tiempoStart,false);
 
-   handle_Saltos=iCustom(Symbol(),Periodo_Saltos,"::Indicators\\Saltos.ex5",Barras,Clr_Saltos,Width_Saltos,Style_Saltos,nombreLinea,false);
+   handle_Saltos=iCustom(Symbol(),Periodo_Saltos,"::Indicators\\Saltos.ex5",Barras,Clr_Saltos,Width_Saltos,Style_Saltos,nombreLinea);
 //---
    return(INIT_SUCCEEDED);
   }

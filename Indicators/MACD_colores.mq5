@@ -75,7 +75,7 @@ int OnCalculate(const int rates_total,
       return 0;
 
    for(int shift=to_copy-1; shift>=0; shift--)
-     {   
+     {
       MACD_HistogramBuffer[shift]=MACD[shift]-MEDIA[shift];
       SetColorBarMACD(shift,rates_total);
      }
@@ -114,14 +114,22 @@ void SetIndicatorPropiedades()
 void SetColorBarMACD(int shift,int const rates_total)
   {
 //0 Red, 1 Green, 2 White, ver linea 17
+   /* if(rates_total-1>shift)
+      {
+       MACD_HistogramColors[shift]=MACD_HistogramColors[shift+1];
+
+       if(MACD_HistogramBuffer[shift]>MACD_HistogramBuffer[shift+1])
+          MACD_HistogramColors[shift]=1;
+
+       if(MACD_HistogramBuffer[shift]<MACD_HistogramBuffer[shift+1])
+          MACD_HistogramColors[shift]=0;
+      }*/
+
    if(rates_total-1>shift)
      {
-      MACD_HistogramColors[shift]=MACD_HistogramColors[shift+1];
-
-      if(MACD_HistogramBuffer[shift]>MACD_HistogramBuffer[shift+1])
+      if(MACD_HistogramBuffer[shift]>=0)
          MACD_HistogramColors[shift]=1;
-
-      if(MACD_HistogramBuffer[shift]<MACD_HistogramBuffer[shift+1])
+      else
          MACD_HistogramColors[shift]=0;
      }
   }

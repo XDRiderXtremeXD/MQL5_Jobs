@@ -187,6 +187,12 @@ int OnCalculate(const int rates_total,
       for(int IndicatorShift=MathMin(Start,rates_total-int(PeriodSeconds(PeriodoIndicador)/PeriodSeconds(Period()))); IndicatorShift<rates_total; IndicatorShift++)
         {
          int barshift=iBarShift(Symbol(),PeriodoIndicador,time[IndicatorShift-1],false);
+         
+         if(barshift==-1){
+         Print(IndicatorShift);
+         Print(time[IndicatorShift-1]);
+         continue;}
+         
          if(barshift>ArraySize(STD_DN)-1 || barshift>ArraySize(STD_UP)-1)
             continue;
 

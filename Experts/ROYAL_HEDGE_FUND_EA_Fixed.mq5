@@ -17,21 +17,21 @@ enum ENUM_Horas {_0am=0, _1am=1, _2am=2, _3am=3, _4am=4, _5am=5, _6am=6, _7am=7,
                  _1pm=13, _2pm=14, _3pm=15, _4pm=16, _5pm=17, _6pm=18, _7pm=19, _8pm=20, _9pm=21, _10pm=22, _11pm=23,
                 };
 
-extern string title6 = "GENERAL SETTINGS"; // General Settings
-extern int MagicNumber = 12345; // Magic Number
-extern int Slippage = 1;
-extern string Comentario="Royal Hedge";
-extern string title1 = "TIME SETTINGS"; // Time Setting
-extern int Secs = 60; // ORDER MODIFICATIONS (Should be same as TF)
-extern string title2 = "MONEY MANAGEMENT"; // MONEY MANAGEMENT
-extern double FixedLot = 0.01; // Fixed Lots 0.0 = MM
-extern double RiskPercent; // Risk MM%
-extern string title3 = "TRADE SETTING IN POINTS"; // TRADE SETTINGS
-extern double Delta = 0.5; // ORDER DISTANCE
-extern double MaxDistance = 7; // THETA (inhibition of order range)
-extern double Stop = 10; // Stop Loss size
-extern double MaxTrailing = 4; // COS (Inhibition of Trailing Range)
-extern int MaxSpread = 5555; // Max Spread Limit
+input string title6 = "GENERAL SETTINGS"; // General Settings
+input int MagicNumber = 12345; // Magic Number
+input int Slippage = 1;
+input string Comentario="Royal Hedge";
+input string title1 = "TIME SETTINGS"; // Time Setting
+input int Secs = 60; // ORDER MODIFICATIONS (Should be same as TF)
+input string title2 = "MONEY MANAGEMENT"; // MONEY MANAGEMENT
+input double FixedLot = 0.01; // Fixed Lots 0.0 = MM
+input double RiskPercent; // Risk MM%
+input string title3 = "TRADE SETTING IN POINTS"; // TRADE SETTINGS
+input double delta = 0.5; // ORDER DISTANCE
+input double MaxDistance = 7; // THETA (inhibition of order range)
+input double Stop = 10; // Stop Loss size
+input double MaxTrailing = 4; // COS (Inhibition of Trailing Range)
+input int MaxSpread = 5555; // Max Spread Limit
 input string S1_31="|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|   HORARIO OPERAR  |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|";//---------------------------------------
 input ENUM_Horas HoraInicioOperar=_12pm;
 input uchar MinutoInicioOperar=30;
@@ -211,11 +211,21 @@ double Id_0150;
 double Id_0158;
 double Id_0180[];
 double returned_double;
+double Delta;
+
+datetime TiempoUntil=D'2024.03.10 00:00';   ;
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
 int OnInit()
   {
+   if(TiempoUntil<TimeCurrent())
+     {
+      Alert("tiempo de prueba termino");
+      return INIT_FAILED;
+     }
+
+   Delta=delta;
    Diario=true;
    Mensual=true;
    int Li_FFFC;
