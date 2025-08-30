@@ -7,22 +7,48 @@
 #property link      "https://www.mql5.com"
 #property version   "1.00"
 #include "ControlsDialog.mqh"
+
+
+input string PrimerActivo_="AUDUSD";
+input double PrimerLotaje_=0.01;
+input string SegundoActivo_="EURUSD";
+input double SegundoLotaje_=0.01;
+input bool Primer_Activo_Es_Compra_=true;
+input double Close_At_=100;
 //+------------------------------------------------------------------+
 //| Global Variables                                                 |
 //+------------------------------------------------------------------+
-CControlsDialog ExtDialog;
+CControlsDialog ExtDialog();
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
 //+------------------------------------------------------------------+
 int OnInit()
   {
+   bool custom;
+   if(!SymbolExist(PrimerActivo_,custom))
+     {
+      Alert(PrimerActivo_," no existe en esta cuenta");
+      return INIT_PARAMETERS_INCORRECT;
+     }
+   if(!SymbolExist(SegundoActivo_,custom))
+     {
+      Alert(SegundoActivo_," no existe en esta cuenta");
+      return INIT_PARAMETERS_INCORRECT;
+     }
+
 //--- create application dialog
-   if(!ExtDialog.Create(0,"Controls",0,20,20,360,400))
+   if(!ExtDialog.Create(0,"Controls",0,20,20,360,350,
+                        PrimerActivo_,
+                        PrimerLotaje_,
+                        SegundoActivo_,
+                        SegundoLotaje_,
+                        Primer_Activo_Es_Compra_,
+                        Close_At_))
       return(INIT_FAILED);
 //--- run application
    ExtDialog.Run();
-   
+
    EventSetMillisecondTimer(1);
 //--- succeed
    return(INIT_SUCCEEDED);
@@ -53,3 +79,4 @@ void OnTimer()
 //--- destroy dialog
    ExtDialog.ActualizarBasket();
   }
+//+------------------------------------------------------------------+

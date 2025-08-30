@@ -38,7 +38,7 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 //| Expert deinitialization function                                 |
 //+------------------------------------------------------------------+
-void OnTimer()
+void OnTrade()
   {
    int OrdenesTotales=OrdersTotal();
 
